@@ -1,0 +1,28 @@
+{
+  "transactions": [
+    {
+      "id": "1",
+      "name": "Hamburguer",
+      "price": 14000,
+      "category": "Venda",
+      "type": "income",
+      "createdAt": "2023-03-01"
+    },
+    {
+      "id": "2",
+      "name": "Venda de Casa",
+      "price": 14000,
+      "category": "Venda",
+      "type": "income",
+      "createdAt": "2023-03-01"
+    },
+    {
+      "id": "3",
+      "name": "Hemburguer",
+      "price": 14000,
+      "category": "Venda",
+      "type": "income",
+      "createdAt": "2023-03-01"
+    }
+  ]
+}
