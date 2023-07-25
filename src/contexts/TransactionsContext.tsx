@@ -1,17 +1,14 @@
 import { ReactNode, createContext, useEffect, useState } from 'react';
-import api from '../libs/api';
-
-interface ITransaction {
-  id: string;
-  name: string;
-  price: number;
-  category: string;
-  type: 'income' | 'outcome';
-  createdAt: string;
-}
+import {
+  CreateTransactionForm,
+  ITransaction,
+  transactionApi,
+} from '../api/transaction';
 
 interface IContext {
   transactions: ITransaction[];
+  searchTransaction: (params?: any) => Promise<void>;
+  createTransaction: (form: CreateTransactionForm) => Promise<void>;
 }
 
 interface IProps {
@@ -24,11 +21,31 @@ export default function TransactionProvider({ children }: IProps) {
   const [transactions, setTransactions] = useState<ITransaction[]>([]);
 
   useEffect(() => {
-    api.get('/transactions').then(({ data }) => setTransactions(data));
+    transactionApi
+      .find({
+        _sort: 'createdAt',
+        _order: 'desc',
+      })
+      .then(({ data }) => setTransactions(data));
   }, []);
 
+  async function searchTransaction(params?: any) {
+    const { data } = await transactionApi.find(params);
+    setTransactions(data);
+  }
+
+  async function createTransaction(form: CreateTransactionForm) {
+    const { data } = await transactionApi.create({
+      ...form,
+      createdAt: new Date(),
+    });
+    setTransactions((state) => [...state, data]);
+  }
+
   return (
-    <TransactionContext.Provider value={{ transactions }}>
+    <TransactionContext.Provider
+      value={{ transactions, searchTransaction, createTransaction }}
+    >
       {children}
     </TransactionContext.Provider>
   );

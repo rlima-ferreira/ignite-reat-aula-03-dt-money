@@ -42,7 +42,7 @@ export const Content = styled(DialogContent)`
       }
     }
 
-    buton[type='submit'] {
+    button[type='submit'] {
       height: 50px;
       border: 0;
       background-color: ${(props) => props.theme['green-500']};

@@ -1,4 +1,8 @@
-import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react';
+import {
+  ArrowCircleDown,
+  ArrowCircleUp,
+  CurrencyDollarSimple,
+} from 'phosphor-react';
 import { useContext } from 'react';
 import { TransactionContext } from '../../contexts/TransactionsContext';
 import { priceFormatter } from '../../utils/formatter';
@@ -36,7 +40,7 @@ export default function Summary() {
       <SummaryCard variant="green">
         <header>
           <span>Total</span>
-          <CurrencyDollar size={32} color="#fff" />
+          <CurrencyDollarSimple size={32} color="#fff" />
         </header>
         <strong>
           {priceFormatter.format(summary.income - summary.outcome)}
